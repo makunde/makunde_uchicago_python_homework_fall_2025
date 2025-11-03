@@ -1,0 +1,8 @@
+# Problem 7 
+# Makunde
+    # Randomly select an object for the computer's choice
+Contains at least one of the following characters: !,@,#,$,%
+SPECIAL_CHARACTERS = "!@#$%"
+# This implementation does not exit after the program and contiously prompts the user until they enter a valid input
+    # Formula for conversion https://www.calculatorsoup.com/calculators/conversions/fahrenheit-to-celsius.php
+# Complete this function to find and return the largest of three numbers"""
