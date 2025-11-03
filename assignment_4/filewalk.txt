@@ -1,0 +1,9 @@
+/Users/georg/Documents/uchicago_concepts_of_programming/assignment_4/home
+/Users/georg/Documents/uchicago_concepts_of_programming/assignment_4/home/file2.txt
+/Users/georg/Documents/uchicago_concepts_of_programming/assignment_4/home/file1.txt
+/Users/georg/Documents/uchicago_concepts_of_programming/assignment_4/home/photos
+/Users/georg/Documents/uchicago_concepts_of_programming/assignment_4/home/photos/favorites
+/Users/georg/Documents/uchicago_concepts_of_programming/assignment_4/home/photos/favorites/beach.png
+/Users/georg/Documents/uchicago_concepts_of_programming/assignment_4/home/photos/favorites/hawaii.png
+/Users/georg/Documents/uchicago_concepts_of_programming/assignment_4/home/photos/photo2.png
+/Users/georg/Documents/uchicago_concepts_of_programming/assignment_4/home/photos/photo1.jpg
