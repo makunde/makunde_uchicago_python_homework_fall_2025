@@ -1,9 +1,13 @@
 import statistics
 
+
 def main():
-    file = open("/Users/georg/Documents/uchicago_concepts_of_programming/assignment_4/numbers.txt")
+    file = open(
+        "/Users/georg/Documents/uchicago_concepts_of_programming/assignment_4/numbers.txt"
+    )
     numbers = [int(line) for line in file.read().splitlines()]
     get_stats(numbers)
+
 
 def get_stats(numbers):
     mean = statistics.mean(numbers)

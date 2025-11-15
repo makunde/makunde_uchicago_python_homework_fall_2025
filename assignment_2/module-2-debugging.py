@@ -1,20 +1,23 @@
-
 # Find all the errors in this program and correct them. The program should be error free and run without any issues.
+
 
 def is_on_menu(choice):
     """Determine if user choice is on the menu. Returns `True` if it is else return `False`"""
-    if choice == "burger" or \
-        choice == "fries" or \
-        choice == "chheeseburger" or \
-        choice == "nuggets" or \
-        choice == "ice_cream": 
+    if (
+        choice == "burger"
+        or choice == "fries"
+        or choice == "chheeseburger"
+        or choice == "nuggets"
+        or choice == "ice_cream"
+    ):
         return "Your choice is on the menu"
     else:
         return "Your choice is not on the menu."
 
-def cost (choice):
+
+def cost(choice):
     """Return the cost for a given menu item."""
-    if choice == "burger": 
+    if choice == "burger":
         money = 5.00
     elif choice == "fries":
         money = 2.00
@@ -23,10 +26,10 @@ def cost (choice):
     elif choice == "nuggets":
         money == 4.00
     elif choice == "ice_cream":
-        money = 3.00 
+        money = 3.00
     else:
         mone = "n/a"
-    
+
     return money
 
 
@@ -34,9 +37,8 @@ def cost (choice):
 choice = input("What would you like to order?")
 
 # Print the choice and the cost
-print ("Your choice is: ", choice)
+print("Your choice is: ", choice)
 if is_on_menu(choice):
     print(f"That will be: ${cost(choice):.2f}")
-else: 
+else:
     print("We don't serve that. Please try again.")
-

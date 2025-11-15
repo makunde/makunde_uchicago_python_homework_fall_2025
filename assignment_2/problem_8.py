@@ -1,4 +1,5 @@
-import random   
+import random
+
 """Write a Rock-Papers-Scissors game where a user plays against the computer.
 
 The program should ask the user to choose an object and then compare to a randomly generated object from the computer.
@@ -36,10 +37,11 @@ We will discuss the details of random in more detail later, but for now use foll
 
 Put the import random statement at the very top of your file.
 """
-# Problem 7 
+# Problem 7
 # Makunde
 JAJANKEN = ["paper", "rock", "scissors"]
 WIN_CONDITIONS = {"paper": "rock", "rock": "scissors", "scissors": "paper"}
+
 
 def jajanken():
     # Randomly select an object for the computer's choice
@@ -58,9 +60,11 @@ def jajanken():
         print(f"The computer choose {computer_object}, computer wins :(")
     play_again()
 
+
 def play_again():
     play_again = input("Would you like to play again? (Y/N) ")
     if play_again.lower() == "y":
         jajanken()
+
 
 jajanken()

@@ -4,10 +4,12 @@ from enum import Enum
 JAJANKEN = ["paper", "rock", "scissors"]
 WIN_CONDITIONS = {"paper": "rock", "rock": "scissors", "scissors": "paper"}
 
+
 class Outcome(Enum):
     WIN = 1
     LOSS = 2
     TIE = 3
+
 
 def jajanken(user_choice):
     # Randomly select an object for the computer's choice

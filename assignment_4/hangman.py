@@ -5,15 +5,17 @@ SPACE = " "
 PERIOD = "."
 PLACE_HOLDER = "_"
 
+
 class Outcome(Enum):
     WIN = 1
     LOSS = 2
+
 
 def guess_word(word):
     letters_in_word = {x: False for x in word}
     for i in range(TOTAL_GUESSES):
         if i > 0:
-            print(f"You have {TOTAL_GUESSES-i} guesses remaining")
+            print(f"You have {TOTAL_GUESSES - i} guesses remaining")
         guess = input("guess a letter: ")
         if guess in letters_in_word:
             letters_in_word[guess] = True
@@ -40,5 +42,5 @@ def show_progress(word, guess):
         if i == len(word):
             progress += PERIOD
         else:
-            progress+=SPACE
+            progress += SPACE
     return progress

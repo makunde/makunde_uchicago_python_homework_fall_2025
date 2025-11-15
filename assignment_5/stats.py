@@ -28,20 +28,22 @@ def main():
                 pass
 
     random_nums = random_numbers.generate(amount_of_numbers_to_generate, True)
-    get_stats(random_nums)
+    stats = get_stats(random_nums)
+    print(f"mean: {stats['mean']}")
+    print(f"median: {stats['median']}")
+    print(f"mode: {stats['mode']}")
+    print(f"variance: {stats['variance']}")
+    print(f"standard deviation: {stats['standard_deviation']}")
 
 
 def get_stats(numbers):
-    mean = get_mean(numbers)
-    median = get_median(numbers)
-    mode = get_mode(numbers)
-    variance = get_variance(numbers)
-    stdev = get_stdev(numbers)
-    print(f"mean: {mean}")
-    print(f"median: {median}")
-    print(f"mode: {mode}")
-    print(f"variance: {variance}")
-    print(f"standard deviation: {stdev}")
+    stats = {}
+    stats["mean"] = get_mean(numbers)
+    stats["median"] = get_median(numbers)
+    stats["mode"] = get_mode(numbers)
+    stats["variance"] = get_variance(numbers)
+    stats["standard_deviation"] = get_stdev(numbers)
+    return stats
 
 
 def get_mean(numbers):

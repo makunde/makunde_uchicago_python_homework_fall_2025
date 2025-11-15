@@ -1,4 +1,4 @@
-"""Create a password strength validator that prompts the user to enter a password. 
+"""Create a password strength validator that prompts the user to enter a password.
 Evaluate the password using the following criteria and report back to the user if they have chosen a strong password.
 
 The password needs to satisfy the following conditions to be strong.
@@ -9,9 +9,9 @@ Contains at least one of the following characters: !,@,#,$,%
 Contains at least one capital letter and one lower-case letter
 Example:
 
-> Enter a password: password   
-This is not a strong password :(   
-> Enter a password: ABC123def456!   
+> Enter a password: password
+This is not a strong password :(
+> Enter a password: ABC123def456!
 This is a strong password :)"""
 
 SPECIAL_CHARACTERS = "!@#$%"
@@ -27,11 +27,12 @@ def validate_strength():
     else:
         print("This is not a strong password :(")
 
+
 def is_strong(password):
     if len(password) < 12:
         return False
     has_special_character = False
-    has_number = False 
+    has_number = False
     has_upper_case_letter = False
     has_lower_case_letter = False
     for char in password:
@@ -43,6 +44,12 @@ def is_strong(password):
             has_upper_case_letter = True
         elif char in LOWER_CASE_LETTERS:
             has_lower_case_letter = True
-    return has_lower_case_letter and has_upper_case_letter and has_number and has_special_character
+    return (
+        has_lower_case_letter
+        and has_upper_case_letter
+        and has_number
+        and has_special_character
+    )
+
 
 validate_strength()

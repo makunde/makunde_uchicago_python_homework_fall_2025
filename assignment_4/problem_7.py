@@ -10,6 +10,7 @@ named game. The code running the main while-loop, taking user input,
 printing to the console should be part of the __main__ module.
 
 Keep in mind best practices for documentation, variable names, and code reuse."""
+
 import game
 from game import Outcome
 
@@ -36,6 +37,7 @@ def main():
         return
     play_again()
     return
+
 
 def play_again(force="n"):
     force_play = force == FORCE_PLAY_AGAIN

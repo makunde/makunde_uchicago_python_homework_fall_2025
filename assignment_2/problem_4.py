@@ -3,8 +3,9 @@
 Do take a minute to look up this function (help(max)) and see how you might use it in the future.
 
 # Complete this function to find and return the largest of three numbers"""
-  
-def max_of_three(a,b,c):
+
+
+def max_of_three(a, b, c):
     max = a
     if b > max:
         max = b
@@ -12,7 +13,8 @@ def max_of_three(a,b,c):
         max = c
     return max
 
-print(max_of_three(20, 3,22))
-print(max_of_three(25, 3,22))
-print(max_of_three(20, 28,22))
-print(max_of_three(-20, -3,-22))
+
+print(max_of_three(20, 3, 22))
+print(max_of_three(25, 3, 22))
+print(max_of_three(20, 28, 22))
+print(max_of_three(-20, -3, -22))

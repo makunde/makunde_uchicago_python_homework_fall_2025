@@ -8,10 +8,11 @@ You may only use the modulus operator % for the final check of divisibility by 1
 
 Example:
 
-> Enter a number: 24   
-This is not divisible by 11.   
-> Enter a number: 2728   
+> Enter a number: 24
+This is not divisible by 11.
+> Enter a number: 2728
 This is divisible by 11."""
+
 
 def is_divisible_by_11():
     num = int(input("Enter a number: "))
@@ -19,5 +20,6 @@ def is_divisible_by_11():
         print("This is divisible by 11")
     else:
         print("This is not divisible by 11")
+
 
 is_divisible_by_11()
