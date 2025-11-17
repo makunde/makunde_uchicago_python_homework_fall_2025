@@ -22,7 +22,6 @@ def get_scores_from_file(filename):
     text = open(filename).read()
     word_pattern = re.compile(r"(?:^|\n)([a-zA-Z]{3})\b")
     words_list = word_pattern.findall(text)
-    print(words_list)
     scores = []
     for word in words_list:
         score = 0
