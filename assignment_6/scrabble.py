@@ -31,6 +31,7 @@ TILE_SCORE = {
 }
 LETTER_FORMAT_PATTERN = re.compile(r"^(?:[a-zA-z][\s,]?){1,7}$")
 LETTER_EXTRACTOR_PATTERN = re.compile(r"[a-zA-Z]")
+PUNCTUATION = ".!?"
 
 
 def validate_scrable_rack(rack_letters):
@@ -94,3 +95,15 @@ def display_top_words_for_each_length(top_words_per_length):
         words.reverse()
         for word_score_string in words:
             print(word_score_string)
+
+
+def display_letters_for_slack(desired_letters):
+    final_string = ""
+    for char in desired_letters:
+        if char == " ":
+            char = "blank"
+        if char in PUNCTUATION:
+            final_string += char
+            continue
+        final_string += f":scrabble-{char.lower()}:"
+    print(final_string)
