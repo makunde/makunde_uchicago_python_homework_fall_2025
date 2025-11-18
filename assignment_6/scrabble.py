@@ -32,6 +32,7 @@ TILE_SCORE = {
 LETTER_FORMAT_PATTERN = re.compile(r"^(?:[a-zA-z][\s,]?){1,7}$")
 LETTER_EXTRACTOR_PATTERN = re.compile(r"[a-zA-Z]")
 
+
 def validate_scrable_rack(rack_letters):
     if not LETTER_FORMAT_PATTERN.match(rack_letters):
         print(
@@ -39,6 +40,7 @@ def validate_scrable_rack(rack_letters):
         )
         return False
     return True
+
 
 def get_all_possible_letter_combos(rack_letters):
     rack_letters = LETTER_EXTRACTOR_PATTERN.findall(rack_letters.lower())
@@ -50,10 +52,10 @@ def get_all_possible_letter_combos(rack_letters):
         )
     return ["".join(char) for char in all_possible_permutations]
 
+
 def load_valid_scrable_words(filename):
-    return set(
-        open(filename).read().splitlines()
-    )
+    return set(open(filename).read().splitlines())
+
 
 def get_sorted_valid_words_from_letter_combos(letter_combos, valid_words_set):
     validated = []
@@ -65,6 +67,7 @@ def get_sorted_valid_words_from_letter_combos(letter_combos, valid_words_set):
             score += TILE_SCORE[char]
         validated.append((len(permutation), score, permutation))
     return sorted(validated, reverse=True)
+
 
 def save_top_15_words_for_each_length(words_data_list):
     word_count = 0
@@ -79,8 +82,11 @@ def save_top_15_words_for_each_length(words_data_list):
             continue
         word_count += 1
         result_string = f"{word} - {score} points"
-        save_words_for_length[length] = save_words_for_length.get(length, []) + [result_string]
+        save_words_for_length[length] = save_words_for_length.get(length, []) + [
+            result_string
+        ]
     return save_words_for_length
+
 
 def display_top_words_for_each_length(top_words_per_length):
     for length, words in top_words_per_length.items():

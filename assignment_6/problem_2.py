@@ -76,7 +76,6 @@ This program should make use of best practices in code design and modularization
 
 Specific functionality should be factored out into dedicated functions and related functions should be collected into modules."""
 
-
 import os
 import scrabble
 
@@ -91,7 +90,9 @@ def main():
         return
     all_possible_letter_combos = scrabble.get_all_possible_letter_combos(rack_letters)
     all_possible_scrable_words = scrabble.load_valid_scrable_words(SCRABBLE_WORDS_FILE)
-    valid_words = scrabble.get_sorted_valid_words_from_letter_combos(all_possible_letter_combos, all_possible_scrable_words)
+    valid_words = scrabble.get_sorted_valid_words_from_letter_combos(
+        all_possible_letter_combos, all_possible_scrable_words
+    )
     top_15_words_per_length = scrabble.save_top_15_words_for_each_length(valid_words)
     scrabble.display_top_words_for_each_length(top_15_words_per_length)
 
