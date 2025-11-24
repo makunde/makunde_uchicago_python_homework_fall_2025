@@ -28,7 +28,6 @@ COMMON_WORDS_FLAG = "--common_words_filter="
 
 
 # See Instructions in README
-# I saw in the feedback that I need to add more docuentation and sample command. I have all of it in the README file.
 def main():
     args = sys.argv[1:]
     common_words_filter = False
