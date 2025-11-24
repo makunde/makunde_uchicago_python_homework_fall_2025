@@ -21,7 +21,7 @@ python3 -m pip install --user pypdf
 python problem_8.py --common_words_filter=[common word .txt file] [lecture pdf1] [lecture pdf2]...
 ```
 ### Exact copy-paste command for all lecture slides
-Paste the following single command in the `assignment_5` directory to process the three provided lecture PDFs (these PDFs live in `assignment_5/lecture_pdfs/`):
+Paste the following single command in the `root` directory to process the three provided lecture PDFs (these PDFs live in `assignment_5/lecture_pdfs/`):
 
 ```bash
 python problem_8.py --common_words_filter=common_words.txt lecture_pdfs/*.pdf
