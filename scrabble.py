@@ -35,7 +35,7 @@ LETTER_EXTRACTOR_PATTERN = re.compile(r"[a-zA-Z]")
 
 class Word:
     """Represents a single Scrabble word with its score and length.
-    
+
     Attributes:
         chars: The word characters
         score: Scrabble score for this word
@@ -44,7 +44,7 @@ class Word:
 
     def __init__(self, chars, score):
         """Initialize a Word with characters and score.
-        
+
         Args:
             chars: The word as a string
             score: The calculated Scrabble score
@@ -80,7 +80,7 @@ class Word:
         if self.score != other.score:
             return self.score <= other.score
         return self.chars <= other.chars
-    
+
     def __ge__(self, other):
         """Compare words by length, then score, then alphabetically."""
         if self.length != other.length:
@@ -88,14 +88,14 @@ class Word:
         if self.score != other.score:
             return self.score >= other.score
         return self.chars >= other.chars
-    
+
     def __eq__(self, other):
         """Check if two words are equal (same chars, score, and length)."""
         score_match = self.score == other.score
         length_match = self.length == other.length
         char_match = self.chars == other.chars
         return score_match and length_match and char_match
-    
+
     def __ne__(self, other):
         """Check if two words are not equal."""
         score_match = self.score == other.score
@@ -110,14 +110,15 @@ class Word:
 
 class ScrabbleInputValidator:
     """Validates and processes user input for Scrabble rack letters.
-    
+
     Attributes:
         _raw_rack_letters: User input for scrabble rack (private)
         valid_rack_letters: Cleaned letters (no spaces/commas) or None if invalid
     """
+
     def __init__(self, rack_letters):
         """Initialize validator with raw input.
-        
+
         Args:
             rack_letters: User input string for Scrabble rack
         """
@@ -126,7 +127,7 @@ class ScrabbleInputValidator:
 
     def _is_valid_scrable_rack(self):
         """Check if input matches valid format (1-7 letters with optional spaces/commas).
-        
+
         Returns:
             True if valid format, False otherwise. Prints error message if invalid.
         """
@@ -136,10 +137,10 @@ class ScrabbleInputValidator:
             )
             return False
         return True
-    
+
     def _get_valid_rack_letters(self):
         """Extract and return valid letters from input, or None if invalid.
-        
+
         Returns:
             List of cleaned letters (lowercase) if valid, None if invalid
         """
@@ -147,17 +148,14 @@ class ScrabbleInputValidator:
             return LETTER_EXTRACTOR_PATTERN.findall(self._raw_rack_letters.lower())
         return None
 
-    
-    
-
 
 class ScrabbleWordValidator:
     """Validates and generates valid Scrabble words from a rack of letters.
-    
+
     This class takes a Scrabble rack of letters and finds all valid words that can be
     made from those letters by comparing against a dictionary file. Words are sorted
     by length (descending), then by score (descending).
-    
+
     Attributes:
         _filename: Path to the Scrabble dictionary file (private)
         _scrable_rack: List of letters from the input rack (private)
@@ -168,7 +166,7 @@ class ScrabbleWordValidator:
 
     def __init__(self, filename, scrable_rack):
         """Initialize the validator with a dictionary file and rack of letters.
-        
+
         Args:
             filename: Path to the Scrabble dictionary file
             scrable_rack: List of letters available in the rack
@@ -177,11 +175,13 @@ class ScrabbleWordValidator:
         self._scrable_rack = scrable_rack
         self._valid_words_set = self._load_valid_scrable_words()
         self._all_letter_permutations = self._get_all_possible_letter_combos()
-        self.valid_scrable_words_from_input = self._get_sorted_valid_words_from_letter_combos()
+        self.valid_scrable_words_from_input = (
+            self._get_sorted_valid_words_from_letter_combos()
+        )
 
     def _load_valid_scrable_words(self):
         """Load all valid words from the dictionary file into a set.
-        
+
         Returns:
             Set of valid Scrabble words (uppercase) from the dictionary file
         """
@@ -189,7 +189,7 @@ class ScrabbleWordValidator:
 
     def _get_all_possible_letter_combos(self):
         """Generate all possible permutations of the rack letters (1 to 7 letters).
-        
+
         Returns:
             List of strings representing all permutations of the rack letters
         """
@@ -203,10 +203,10 @@ class ScrabbleWordValidator:
 
     def _get_sorted_valid_words_from_letter_combos(self):
         """Find all valid words from permutations that exist in the dictionary.
-        
+
         Checks each permutation against the valid words set, calculates the Scrabble
         score, creates Word objects, and sorts them by length and score (descending).
-        
+
         Returns:
             List of Word objects sorted by length (desc), then score (desc)
         """
@@ -223,28 +223,30 @@ class ScrabbleWordValidator:
 
 class WordDisplayer:
     """Displays top Scrabble words organized by word length.
-    
+
     Takes a list of valid words and organizes them by length, keeping at most the top 15
     words for each length. Displays the organized words to console.
-    
+
     Attributes:
         _top_15_words_for_each_length_dict: Dictionary mapping word length to top words up to 15 (private)
     """
-    
+
     def __init__(self, words):
         """Initialize the displayer with a list of words.
-        
+
         Args:
             words: List of Word objects to organize and display
         """
-        self._top_15_words_for_each_length_dict = self._save_top_15_words_for_each_length(words)
+        self._top_15_words_for_each_length_dict = (
+            self._save_top_15_words_for_each_length(words)
+        )
 
     def _save_top_15_words_for_each_length(self, words_list):
         """Organize words by length and keep top words up to 15 for each length.
-        
+
         Args:
             words_list: List of Word objects to organize
-            
+
         Returns:
             Dictionary mapping word length (int) to list of up to 15 Word objects
         """
@@ -266,7 +268,7 @@ class WordDisplayer:
 
     def display_top_words_for_each_length(self):
         """Display up to 15 of the top words for each word length to console.
-        
+
         Prints words grouped by length in descending order of score.
         Format: "N Letter Words" followed by top 15 words as "word - score points"
         """

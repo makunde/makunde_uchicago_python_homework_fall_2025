@@ -23,8 +23,11 @@ def main():
     valid_scrable_rack = ScrabbleInputValidator(rack_letters).valid_rack_letters
     if valid_scrable_rack == None:
         return
-    valid_scrable_rack = ScrabbleWordValidator(SCRABBLE_WORDS_FILE, valid_scrable_rack).valid_scrable_words_from_input
+    valid_scrable_rack = ScrabbleWordValidator(
+        SCRABBLE_WORDS_FILE, valid_scrable_rack
+    ).valid_scrable_words_from_input
     WordDisplayer(valid_scrable_rack).display_top_words_for_each_length()
+
 
 if __name__ == "__main__":
     main()
