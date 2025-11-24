@@ -2,7 +2,7 @@
 
 This folder contains script in `problem_8.py` that extracts keywords from PDF lecture slides and writes a simple index file listing keywords by frequency.
 
-Dependencies
+### Dependencies
 - Python 3.8+ (macOS default Python3 is fine)
 - `pypdf` package (install with pip):
 
@@ -10,27 +10,27 @@ Dependencies
 python3 -m pip install --user pypdf
 ```
 
-Where to run
+### Where to run
 - Run the command from the `assignment_5` directory (the examples below assume your current working directory is `assignment_5`).
 
-Required flag
+### Required flag
 - The `--common_words_filter` flag is required. It tells the script which stopwords file to use to filter out very common words like "the" and "and".
 
-Command
+### Command
 ```bash
 python problem_8.py --common_words_filter=[common word .txt file] [lecture pdf1] [lecture pdf2]...
 ```
-Exact copy-paste command for all lecture slides
+### Exact copy-paste command for all lecture slides
 Paste the following single command in the `assignment_5` directory to process the three provided lecture PDFs (these PDFs live in `assignment_5/lecture_pdfs/`):
 
 ```bash
 python problem_8.py --common_words_filter=common_words.txt lecture_pdfs/*.pdf
 ```
 
-Output location
+### Output location
 - All generated index files are written into the `lecture_pdfs/` folder next to the processed PDFs. For example, running the command above will produce files like `lecture_pdfs/mpcs50101-2025-autumn-module-1-synchronous_index.txt`.
 
-Notes
+### Notes
 - If you get an import error for `pypdf`, make sure you installed the package into the same Python interpreter you run with `python` (or use `python3` explicitly).
 - If you'd prefer to run a single PDF, just pass a single PDF path instead of the three shown above.
 
