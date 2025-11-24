@@ -1,4 +1,4 @@
-# Assignment 5 — PDF indexer (usage)
+# PDF indexer (usage)
 
 This folder contains script in `problem_8.py` that extracts keywords from PDF lecture slides and writes a simple index file listing keywords by frequency.
 
@@ -11,7 +11,7 @@ python3 -m pip install --user pypdf
 ```
 
 ### Where to run
-- Run the command from the `assignment_5` directory (the examples below assume your current working directory is `assignment_5`).
+- Run the command from the `root` directory (the examples below assume your current working directory is `root`).
 
 ### Required flag
 - The `--common_words_filter` flag is required. It tells the script which stopwords file to use to filter out very common words like "the" and "and".
