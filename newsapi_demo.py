@@ -10,14 +10,14 @@ API_KEY = "XXXXXXXXXX"
 url = f"https://newsapi.org/v2/top-headlines?country=us&category=technology&pageSize=5&apiKey={API_KEY}"
 
 # Search headlines with a query using the `q` parameter
-#url = f"https://newsapi.org/v2/everything?q=scrabble&sortBy=publishedAt&pageSize=5&apiKey=={API_KEY}"
+# url = f"https://newsapi.org/v2/everything?q=scrabble&sortBy=publishedAt&pageSize=5&apiKey=={API_KEY}"
 
 # Request URL Data
 r = requests.get(url)
 
 # Convert into JSON
 json_data = r.json()
-#print(json_data)
+# print(json_data)
 
 # Newsapi query information
 status = json_data["status"]
@@ -25,15 +25,14 @@ total_results = json_data["totalResults"]
 articles = json_data["articles"]
 
 # Caveman debugging
-#print("Status:" + status)
-#print("Total Results:", total_results)
+# print("Status:" + status)
+# print("Total Results:", total_results)
 
-#print(articles[0]["description"])
+# print(articles[0]["description"])
 
 # Note the `pageSize` argument in the API can be used to limit the result that
 # are returned
 for article in articles:
-    print("*",article['title'],article['publishedAt'])
-    print("\t",article['description'])
+    print("*", article["title"], article["publishedAt"])
+    print("\t", article["description"])
     print("-----------------------------------------------\n")
-
