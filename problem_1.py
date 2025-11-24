@@ -20,14 +20,11 @@ SCRABBLE_WORDS_FILE = CURRENT_DIRECTORY + "/scrabble_list.txt"
 
 def main():
     rack_letters = input("Enter the each letter in your rack: ")
-    valid_scrable_rack = ScrabbleInputValidator(rack_letters).valid_rack_letters
-    if valid_scrable_rack == None:
+    scrable_input = ScrabbleInputValidator(rack_letters)
+    if scrable_input.valid_rack_letters is None:
         return
-    valid_scrable_rack = ScrabbleWordValidator(
-        SCRABBLE_WORDS_FILE, valid_scrable_rack
-    ).valid_scrable_words_from_input
-    WordDisplayer(valid_scrable_rack).display_top_words_for_each_length()
-
+    scrable_words = ScrabbleWordValidator(SCRABBLE_WORDS_FILE, scrable_input.valid_rack_letters)
+    WordDisplayer(scrable_words.valid_scrable_words_from_input).display_top_words_for_each_length()
 
 if __name__ == "__main__":
     main()
