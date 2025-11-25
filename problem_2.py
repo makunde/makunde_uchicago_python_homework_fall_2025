@@ -274,14 +274,3 @@ class Fraction:
         if roundTo3:
             return round(self.numerator / self.denominator, 3)
         return self.numerator / self.denominator
-
-f1 = Fraction(5,-8)
-f2 = Fraction(-12,8)
-
-# add
-add_them_up = f1 + f2
-print(add_them_up) # 7/8
-
-# subtract
-add_them_up = f1 - f2
-print(add_them_up) # 3/8
