@@ -56,12 +56,29 @@ Finally, write a method to be able to represent the value of a fraction in decim
 
 
 class Fraction:
-    """Attributes
-    numerator:
-    denominator:
+    """A class to represent a fraction with numerator and denominator.
+    
+    This class implements the Fraction abstract data type with support for
+    arithmetic operations (+, -, *, /), comparison operators (>, <, ==),
+    and conversion to decimal form.
+    
+    Attributes:
+        numerator (int): The top part of the fraction
+        denominator (int): The bottom part of the fraction (cannot be zero)
+        as_decimal (float): The decimal representation of the fraction
     """
 
     def __init__(self, numerator, denominator):
+        """Initialize a Fraction object.
+        
+        Args:
+            numerator (int): The numerator of the fraction
+            denominator (int): The denominator of the fraction
+            
+        Raises:
+            TypeError: If numerator or denominator is not an integer
+            ValueError: If denominator is zero
+        """
         if not isinstance(numerator, int) or not isinstance(denominator, int):
             raise TypeError("Numerator and denominator must be integers")
         if denominator == 0:
@@ -71,27 +88,67 @@ class Fraction:
         self.as_decimal = self._to_decimal()
 
     def __add__(self, other):
+        """Add two fractions together.
+        
+        Args:
+            other (Fraction): The fraction to add to this fraction
+            
+        Returns:
+            Fraction: A new Fraction representing the sum
+        """
         self_lcm, other_lcm = self._equalize_denominators(other)
         final_numerator = self_lcm.numerator + other_lcm.numerator
-        return Fraction(final_numerator, self_lcm.denominator).simplify()
+        return Fraction(final_numerator, self_lcm.denominator)._simplify()
 
     def __sub__(self, other):
+        """Subtract one fraction from another.
+        
+        Args:
+            other (Fraction): The fraction to subtract from this fraction
+            
+        Returns:
+            Fraction: A new Fraction representing the difference
+        """
         self_lcm, other_lcm = self._equalize_denominators(other)
         final_numerator = self_lcm.numerator - other_lcm.numerator
-        return Fraction(final_numerator, self_lcm.denominator).simplify()
+        return Fraction(final_numerator, self_lcm.denominator)._simplify()
 
     def __mul__(self, other):
+        """Multiply two fractions together.
+        
+        Args:
+            other (Fraction): The fraction to multiply with this fraction
+            
+        Returns:
+            Fraction: A new Fraction representing the product
+        """
         numerator = self.numerator * other.numerator
         denominator = self.denominator * other.denominator
-        return Fraction(numerator, denominator).simplify()
+        return Fraction(numerator, denominator)._simplify()
 
     def __truediv__(self, other):
+        """Divide one fraction by another.
+        
+        Args:
+            other (Fraction): The fraction to divide this fraction by
+            
+        Returns:
+            Fraction: A new Fraction representing the quotient
+        """
         numerator = self.numerator * other.denominator
         denominator = self.denominator * other.numerator
-        return Fraction(numerator, denominator).simplify()
+        return Fraction(numerator, denominator)._simplify()
 
     def __str__(self):
-        self.simplify()
+        """Return a string representation of the fraction.
+        
+        The fraction is simplified and displayed as either a proper fraction
+        (e.g., "3/5") or a mixed fraction (e.g., "1-1/4").
+        
+        Returns:
+            str: The string representation of the fraction
+        """
+        self._simplify()
         wholes = 0
         leftover = self.numerator
         if self.numerator >= self.denominator:
@@ -105,15 +162,47 @@ class Fraction:
         return f"{self.numerator}/{self.denominator}"
 
     def __gt__(self, other):
+        """Check if this fraction is greater than another.
+        
+        Args:
+            other (Fraction): The fraction to compare with
+            
+        Returns:
+            bool: True if this fraction is greater than other
+        """
         return self._to_decimal(False) > other._to_decimal(False)
 
     def __lt__(self, other):
+        """Check if this fraction is less than another.
+        
+        Args:
+            other (Fraction): The fraction to compare with
+            
+        Returns:
+            bool: True if this fraction is less than other
+        """
         return self._to_decimal(False) < other._to_decimal(False)
 
     def __eq__(self, other):
+        """Check if this fraction equals another.
+        
+        Args:
+            other (Fraction): The fraction to compare with
+            
+        Returns:
+            bool: True if this fraction equals other
+        """
         return self._to_decimal(False) == other._to_decimal(False)
 
     def _equalize_denominators(self, other):
+        """Equalize the denominators of two fractions.
+        
+        Args:
+            other (Fraction): The fraction to equalize with
+            
+        Returns:
+            tuple: Two new Fraction objects with equal denominators
+        """
         denominator = self._least_common_multiple(other)
         self_multiplication_factor = int(denominator / self.denominator)
         other_multiplication_factor = int(denominator / other.denominator)
@@ -124,26 +213,57 @@ class Fraction:
             Fraction(other_new_numerator, denominator),
         )
 
-    def simplify(self):
+    def _simplify(self):
+        """Simplify the fraction to its lowest terms.
+        
+        This modifies the fraction in place and returns self.
+        
+        Returns:
+            Fraction: This fraction object (for method chaining)
+        """
         gcd = self._greatest_common_divisor(self.numerator, self.denominator)
         self.numerator = int(self.numerator / gcd)
         self.denominator = int(self.denominator / gcd)
         return self
 
     def _least_common_multiple(self, other):
+        """Calculate the least common multiple of two denominators.
+        
+        Args:
+            other (Fraction): The fraction to find LCM with
+            
+        Returns:
+            int: The least common multiple of the denominators
+        """
         return int(
             abs(other.denominator * self.denominator)
             / self._greatest_common_divisor(self.denominator, other.denominator)
         )
 
     def _greatest_common_divisor(self, a, b):
+        """Calculate the greatest common divisor using Euclidean algorithm.
+        
+        Args:
+            a (int): First number
+            b (int): Second number
+            
+        Returns:
+            int: The greatest common divisor of a and b
+        """
         r = a % b
         if r == 0:
             return b
         return self._greatest_common_divisor(b, r)
 
     def _to_decimal(self, roundTo3=True):
-        """Return a fraction object instance as a decimal rounded to 3 places"""
+        """Return a fraction object instance as a decimal rounded to 3 places.
+        
+        Args:
+            roundTo3 (bool): Whether to round to 3 decimal places. Defaults to True.
+            
+        Returns:
+            float: The decimal representation of the fraction
+        """
         if roundTo3:
             return round(self.numerator / self.denominator, 3)
         return self.numerator / self.denominator
