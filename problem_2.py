@@ -85,7 +85,7 @@ class Fraction:
         denominator = self.denominator * other.denominator
         return Fraction(numerator, denominator).simplify()
 
-    def __div__(self, other):
+    def __truediv__(self, other):
         numerator = self.numerator * other.denominator
         denominator = self.denominator * other.numerator
         return Fraction(numerator, denominator).simplify()
