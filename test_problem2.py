@@ -1,5 +1,5 @@
 import pytest
-from fraction import Fraction
+from problem_2 import Fraction
 
 """Unit tests for the Fraction class. 
 
@@ -11,11 +11,14 @@ from fraction import Fraction
 
 def test_initialization():
     """Test fraction creation"""
-    f1 = 0.625
     f = Fraction(5, 8)
     assert f.__str__() == "5/8"
     assert f.as_decimal == 0.625
-    # Add a test to not allow a denominator is 0
+
+
+def test_throws_when_denominator_is_zero():
+    with pytest.raises(ValueError):
+        assert Fraction(5, 0)
 
 
 def test_add():
