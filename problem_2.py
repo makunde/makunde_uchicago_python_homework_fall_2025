@@ -143,23 +143,30 @@ class Fraction:
         """Return a string representation of the fraction.
         
         The fraction is simplified and displayed as either a proper fraction
-        (e.g., "3/5") or a mixed fraction (e.g., "1-1/4").
+        (e.g., "3/5") or a mixed fraction (e.g., "1-1/4"). Properly handles
+        negative fractions.
         
         Returns:
             str: The string representation of the fraction
         """
         self._simplify()
-        wholes = 0
-        leftover = self.numerator
-        if self.numerator >= self.denominator:
-            while leftover > self.denominator:
-                wholes += 1
-                leftover -= self.denominator
-        if wholes > 0:
-            if leftover == 0:
-                return f"{wholes}"
-            return f"{wholes}-{leftover}/{self.denominator}"
-        return f"{self.numerator}/{self.denominator}"
+        is_negative = (self.numerator < 0) != (self.denominator < 0)
+        abs_numerator = abs(self.numerator)
+        abs_denominator = abs(self.denominator)
+        
+        wholes = abs_numerator // abs_denominator
+        remainder = abs_numerator % abs_denominator
+        
+        sign = "-" if is_negative else ""
+        
+        if wholes == 0 and remainder == 0:
+            return "0"
+        elif remainder == 0:
+            return f"{sign}{wholes}"
+        elif wholes == 0:
+            return f"{sign}{remainder}/{abs_denominator}"
+        else:
+            return f"{sign}{wholes}-{remainder}/{abs_denominator}"
 
     def __gt__(self, other):
         """Check if this fraction is greater than another.
@@ -267,3 +274,14 @@ class Fraction:
         if roundTo3:
             return round(self.numerator / self.denominator, 3)
         return self.numerator / self.denominator
+
+f1 = Fraction(5,-8)
+f2 = Fraction(-12,8)
+
+# add
+add_them_up = f1 + f2
+print(add_them_up) # 7/8
+
+# subtract
+add_them_up = f1 - f2
+print(add_them_up) # 3/8
