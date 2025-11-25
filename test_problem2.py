@@ -57,7 +57,7 @@ def test_divide():
     f1 = Fraction(5, 8)
     f2 = Fraction(1, 1)
     f3 = f1 / f2
-    assert f3.__str__() != "5/8"
+    assert f3.__str__() == "5/8"
     assert f3.as_decimal == 0.625
 
 
