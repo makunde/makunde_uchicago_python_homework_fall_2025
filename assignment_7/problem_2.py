@@ -68,6 +68,7 @@ class Fraction:
             raise ValueError("Denominator cannot be zero")
         self.numerator = numerator
         self.denominator = denominator
+        self.as_decimal = self._to_decimal()
 
     def __add__(self, other):
         self_lcm, other_lcm = self._equalize_denominators(other)
@@ -104,13 +105,13 @@ class Fraction:
         return f"{self.numerator}/{self.denominator}"
 
     def __gt__(self, other):
-        return self.as_decimal(False) > other.as_decimal(False)
+        return self._to_decimal(False) > other._to_decimal(False)
 
     def __lt__(self, other):
-        return self.as_decimal(False) < other.as_decimal(False)
+        return self._to_decimal(False) < other._to_decimal(False)
 
     def __eq__(self, other):
-        return self.as_decimal(False) == other.as_decimal(False)
+        return self._to_decimal(False) == other._to_decimal(False)
 
     def _equalize_denominators(self, other):
         denominator = self._least_common_multiple(other)
@@ -141,7 +142,7 @@ class Fraction:
             return b
         return self._greatest_common_divisor(b, r)
 
-    def as_decimal(self, roundTo3=True):
+    def _to_decimal(self, roundTo3=True):
         """Return a fraction object instance as a decimal rounded to 3 places"""
         if roundTo3:
             return round(self.numerator / self.denominator, 3)
