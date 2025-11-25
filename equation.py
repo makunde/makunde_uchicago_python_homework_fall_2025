@@ -10,7 +10,7 @@ def get_difficulty():
     difficulty = 50
     try:
         mode = int(
-            input("select\n1 for easy mode\n2 for medium mode\n3 for hard mode ")
+            input("select\n1 for easy mode\n2 for medium mode\n3 for hard mode\n> ")
         )
         if mode < 1 or mode > 3:
             raise ValueError
@@ -37,9 +37,9 @@ class Equation:
 
     def _generate_random_fractions(self):
         random_denominator = random.randint(1, self.difficulty)
-        random_numerator = random.randint(0, random_denominator)
+        random_numerator = random.randint(1, random_denominator)
         random_denominator2 = random.randint(1, self.difficulty)
-        random_numerator2 = random.randint(0, random_denominator2)
+        random_numerator2 = random.randint(1, random_denominator2)
         return (
             Fraction(random_numerator, random_denominator),
             Fraction(random_numerator2, random_denominator2),
