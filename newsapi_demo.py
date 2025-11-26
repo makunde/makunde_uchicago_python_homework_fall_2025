@@ -1,38 +1,141 @@
-import sys
+"""NewsAPI module for fetching and displaying news articles."""
+
+import os
 import requests
-import json
+from datetime import datetime
+from dotenv import load_dotenv
 
-# Sign up for a free API at https://newsapi.org/register
-API_KEY = "XXXXXXXXXX"
+# Load environment variables from .env file
+load_dotenv()
 
 
-# Technology headlines
-url = f"https://newsapi.org/v2/top-headlines?country=us&category=technology&pageSize=5&apiKey={API_KEY}"
+class NewsAPI:
+    """A class to interact with the NewsAPI.org API."""
 
-# Search headlines with a query using the `q` parameter
-# url = f"https://newsapi.org/v2/everything?q=scrabble&sortBy=publishedAt&pageSize=5&apiKey=={API_KEY}"
+    API_KEY = os.getenv(
+        "NEWS_API_KEY"
+    )  # Not sure if I had to hide it as part of the assignment but just best practice.
+    BASE_URL = "https://newsapi.org/v2"
+    CATEGORIES = {
+        "1": "business",
+        "2": "entertainment",
+        "3": "general",
+        "4": "health",
+        "5": "science",
+        "6": "sports",
+        "7": "technology",
+    }
 
-# Request URL Data
-r = requests.get(url)
+    def __init__(self):
+        """Initialize the NewsAPI client."""
+        self.session = requests.Session()
 
-# Convert into JSON
-json_data = r.json()
-# print(json_data)
+    def _format_date(self, date_str):
+        """Convert date string to readable format (Month Day, Year).
 
-# Newsapi query information
-status = json_data["status"]
-total_results = json_data["totalResults"]
-articles = json_data["articles"]
+        Args:
+            date_str (str): ISO 8601 formatted date string
 
-# Caveman debugging
-# print("Status:" + status)
-# print("Total Results:", total_results)
+        Returns:
+            str: Formatted date string (e.g., "November 26, 2025")
+        """
+        try:
+            formatted_date = datetime.fromisoformat(date_str.replace("Z", "+00:00"))
+            return formatted_date.strftime("%B %d, %Y")
+        except:
+            return date_str
 
-# print(articles[0]["description"])
+    def _display_articles(self, articles):
+        """Display articles in the specified format.
 
-# Note the `pageSize` argument in the API can be used to limit the result that
-# are returned
-for article in articles:
-    print("*", article["title"], article["publishedAt"])
-    print("\t", article["description"])
-    print("-----------------------------------------------\n")
+        Args:
+            articles (list): List of article dictionaries from the API
+        """
+        for article in articles[:10]:
+            title = article.get("title", "No Title")
+            source_name = article.get("source", {}).get("name", "Unknown Source")
+            published_date = self._format_date(article.get("publishedAt", ""))
+            description = article.get("description", "")
+
+            print(
+                f"* {title} - {source_name} ({published_date})\n         {description if description else ''}\n"
+            )
+
+    def get_top_headlines(self, category):
+        """Fetch top headlines for a specific category.
+
+        Args:
+            category (str): Category code (1-7)
+
+        Returns:
+            bool: True if successful, False otherwise
+        """
+        if category not in self.CATEGORIES:
+            print("Invalid category selection.")
+            return False
+
+        category_name = self.CATEGORIES[category]
+        url = f"{self.BASE_URL}/top-headlines"
+        params = {
+            "country": "us",
+            "category": category_name,
+            "pageSize": 10,
+            "apiKey": self.API_KEY,
+        }
+
+        try:
+            response = self.session.get(url, params=params)
+            response.raise_for_status()
+            data = response.json()
+
+            if data.get("status") != "ok":
+                print(f"API Error: {data.get('message', 'Unknown error')}")
+                return False
+
+            articles = data.get("articles", [])
+            if not articles:
+                print("No articles found.")
+                return False
+
+            self._display_articles(articles)
+            return True
+        except requests.RequestException as e:
+            print(f"Error fetching headlines: {e}")
+            return False
+
+    def search_articles(self, query):
+        """Search for articles based on a query.
+
+        Args:
+            query (str): Search query string
+
+        Returns:
+            bool: True if successful, False otherwise
+        """
+        url = f"{self.BASE_URL}/everything"
+        params = {
+            "q": query,
+            "sortBy": "publishedAt",
+            "pageSize": 10,
+            "apiKey": self.API_KEY,
+        }
+
+        try:
+            response = self.session.get(url, params=params)
+            response.raise_for_status()
+            data = response.json()
+
+            if data.get("status") != "ok":
+                print(f"API Error: {data.get('message', 'Unknown error')}")
+                return False
+
+            articles = data.get("articles", [])
+            if not articles:
+                print("No articles found for that search term.")
+                return False
+
+            self._display_articles(articles)
+            return True
+        except requests.RequestException as e:
+            print(f"Error searching articles: {e}")
+            return False
