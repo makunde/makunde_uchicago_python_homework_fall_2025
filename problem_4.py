@@ -50,11 +50,12 @@ Please make a choice: [1] Top headlines [2] Search
 >> 2
 ...
 ..."""
+from newsapi_demo import NewsApp
 
 
 def main():
-    pass
-
+    app = NewsApp()
+    app.run()
 
 
 if __name__ == "__main__":

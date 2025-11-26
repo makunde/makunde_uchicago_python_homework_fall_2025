@@ -139,3 +139,68 @@ class NewsAPI:
         except requests.RequestException as e:
             print(f"Error searching articles: {e}")
             return False
+
+
+class NewsApp:
+    """A command-line application for browsing news headlines."""
+
+    def __init__(self):
+        """Initialize the news application."""
+        self.api = NewsAPI()
+
+    def _display_menu(self):
+        """Display the main menu and get user choice."""
+        return input(
+            "\nPlease make a choice: [1] Top headlines [2] Search\n>> "
+        ).strip()
+
+    def _display_category_menu(self):
+        """Display category selection menu and get user choice."""
+        print("\nSelect which category would you like headlines for:")
+        print("[1] business")
+        print("[2] entertainment")
+        print("[3] general")
+        print("[4] health")
+        print("[5] science")
+        print("[6] sports")
+        print("[7] technology")
+        choice = input(">> ").strip()
+        return choice
+
+    def _get_more_articles(self):
+        """Ask user if they want more articles.
+
+        Returns:
+            bool: True if user wants more articles, False otherwise
+        """
+        response = (
+            input("\nWould you like to find more news articles? [y/n]\n>> ")
+            .strip()
+            .lower()
+        )
+        return response == "y"
+
+    def run(self):
+        """Run the news application main loop."""
+        print("Welcome to Command Line News!")
+
+        while True:
+            choice = self._display_menu()
+
+            if choice == "1":
+                category = self._display_category_menu()
+                self.api.get_top_headlines(category)
+            elif choice == "2":
+                print("\nEnter your search term:")
+                query = input("\nEnter your search term:\n>> ").strip()
+                if query:
+                    self.api.search_articles(query)
+                else:
+                    print("Please enter a valid search term.")
+            else:
+                print("Invalid choice. Please enter 1 or 2.")
+                continue
+
+            if not self._get_more_articles():
+                print("\nThank you for using Command Line News!")
+                break
