@@ -9,6 +9,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+class Colors:
+    """ANSI color codes for terminal coloring."""
+
+    GREEN = "\033[92m"
+    RESET = "\033[0m"
+    BOLD = "\033[1m"
+
+
 class NewsAPI:
     """A class to interact with the NewsAPI.org API."""
 
@@ -57,8 +65,9 @@ class NewsAPI:
             published_date = self._format_date(article.get("publishedAt", ""))
             description = article.get("description", "")
 
+            colored_title = f"{Colors.GREEN}{Colors.BOLD}{title}{Colors.RESET}"
             print(
-                f"* {title} - {source_name} ({published_date})\n         {description if description else ''}\n"
+                f"* {colored_title} - {source_name} ({published_date})\n         {description if description else ''}\n"
             )
 
     def get_top_headlines(self, category):
