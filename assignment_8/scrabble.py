@@ -221,7 +221,6 @@ class ScrabbleWordValidator:
         for permutation in self._all_letter_permutations:
             if permutation.upper() not in self._valid_words_set:
                 continue
-            score = 0
             validated.append(Word(permutation))
         return sorted(validated, reverse=True)
 
