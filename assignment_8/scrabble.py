@@ -1,34 +1,6 @@
 import re
 import itertools
 
-TILE_SCORE = {
-    "a": 1,
-    "c": 3,
-    "b": 3,
-    "e": 1,
-    "d": 2,
-    "g": 2,
-    "f": 4,
-    "i": 1,
-    "h": 4,
-    "k": 5,
-    "j": 8,
-    "m": 3,
-    "l": 1,
-    "o": 1,
-    "n": 1,
-    "q": 10,
-    "p": 3,
-    "s": 1,
-    "r": 1,
-    "u": 1,
-    "t": 1,
-    "w": 4,
-    "v": 4,
-    "y": 4,
-    "x": 8,
-    "z": 10,
-}
 LETTER_FORMAT_PATTERN = re.compile(r"^(?:[a-zA-z][\s,]?){1,7}$")
 LETTER_EXTRACTOR_PATTERN = re.compile(r"[a-zA-Z]")
 
@@ -41,6 +13,34 @@ class Word:
         score: Scrabble score for this word
         length: Number of characters in the word
     """
+    TILE_SCORE = {
+            "a": 1,
+            "c": 3,
+            "b": 3,
+            "e": 1,
+            "d": 2,
+            "g": 2,
+            "f": 4,
+            "i": 1,
+            "h": 4,
+            "k": 5,
+            "j": 8,
+            "m": 3,
+            "l": 1,
+            "o": 1,
+            "n": 1,
+            "q": 10,
+            "p": 3,
+            "s": 1,
+            "r": 1,
+            "u": 1,
+            "t": 1,
+            "w": 4,
+            "v": 4,
+            "y": 4,
+            "x": 8,
+            "z": 10,
+        }
 
     def __init__(self, chars):
         """Initialize a Word with characters and score.
@@ -110,9 +110,8 @@ class Word:
     def _get_score(self):
         score = 0
         for char in self.chars:
-            score += TILE_SCORE[char]
+            score += self.TILE_SCORE[char.lower()]
         return score
-            
 
 
 class ScrabbleInputValidator:
