@@ -1,0 +1,9 @@
+  PID TTY           TIME CMD
+19484 ttys004    0:02.17 /Users/georg/opt/anaconda3/bin/python /Users/georg/opt/anaconda3/bin/jupyter-notebook assignment_8/unix_challenge.ipynb
+20523 ttys004    0:02.08 /Users/georg/opt/anaconda3/bin/python /Users/georg/opt/anaconda3/bin/jupyter-notebook assignment_8/unix_challenge.ipynb
+30716 ttys004    0:04.79 zsh
+37394 ttys009    0:00.04 /bin/zsh -i
+43513 ttys017    0:00.07 -zsh
+43530 ttys017    0:00.01 /bin/bash /opt/anaconda3/bin/jupyter_mac.command
+43532 ttys017    3:14.91 /opt/anaconda3/bin/python /opt/anaconda3/bin/jupyter-notebook
+70744 ttys017    0:00.07 /opt/anaconda3/bin/python -c from multiprocessing.resource_tracker import main;main(107)
