@@ -22,10 +22,12 @@ import time
 
 temperatures = [-32.0, 0.0, 1.0, 10.0, 32.0, 50.3, 88.8, 101.0]
 
+
 # Conversion formula: C to F is (temp * 9/5) + 32
 # Reference: https://www.calculatorsoup.com/calculators/conversions/celsius-to-fahrenheit.php
 def celsius_to_fahrenheit(celsius):
-    return round((celsius * 9/5) + 32, 2)
+    return round((celsius * 9 / 5) + 32, 2)
+
 
 converted_temps_map = list(map(celsius_to_fahrenheit, temperatures))
 print("Approach 1 - Using map:")
@@ -67,7 +69,9 @@ for _ in range(100):
 list_comp_time = time.time() - start
 
 print(f"Map approach: {map_time:.6f} seconds (100 runs on {len(large_temps)} elements)")
-print(f"List comprehension approach: {list_comp_time:.6f} seconds (100 runs on {len(large_temps)} elements)")
+print(
+    f"List comprehension approach: {list_comp_time:.6f} seconds (100 runs on {len(large_temps)} elements)"
+)
 print(f"Difference: {abs(map_time - list_comp_time):.6f} seconds")
 
 if map_time < list_comp_time:

@@ -1,15 +1,15 @@
 """
-Write a function that determines the maximum 
+Write a function that determines the maximum
 value from a list of numerical values.
 
 def max_number(list_of_numbers):
   pass
-Write a statement using reduce that also 
-determines the maximum value of a list of 
+Write a statement using reduce that also
+determines the maximum value of a list of
 numerical values.
 
 reduce(something,something)
-Compare the two approaches in terms of the 
+Compare the two approaches in terms of the
 time complexity. You may want to sneek a peek
 at the implementation of any of the Python
 standard library functions you are using.
@@ -21,13 +21,14 @@ from functools import reduce
 def max_number(list_of_numbers):
     if not list_of_numbers:
         return None
-    
+
     max_val = list_of_numbers[0]
     for num in list_of_numbers[1:]:
         if num > max_val:
             max_val = num
-    
+
     return max_val
+
 
 max_with_reduce = lambda lst: reduce(lambda a, b: a if a > b else b, lst)
 
@@ -52,8 +53,7 @@ implementation overhead, not algorithmic complexity.
 
 if __name__ == "__main__":
     test_list = [3, 7, 2, 9, 1, 5]
-    
+
     print(f"Manual function: {max_number(test_list)}")
     print(f"Using reduce: {max_with_reduce(test_list)}")
     print(f"Built-in max: {max(test_list)}")
-

@@ -8,10 +8,13 @@ The program should keep track of the number of completed and attempted
 problems and report them at the end.
 
 Running the program should look similar to the following:"""
+
 from equation import get_difficulty
 from equation import Equation
 
 """ """
+
+
 def main():
     print("Welcome to Action Fractions!")
     difficulty = get_difficulty()

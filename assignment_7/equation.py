@@ -79,7 +79,7 @@ class Equation:
                 return None
 
         return Fraction(numerator, denominator)
-    
+
     def is_user_correct(self):
         if self.user_provided_answer is None:
             return False

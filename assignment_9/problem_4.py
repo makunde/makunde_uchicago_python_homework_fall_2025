@@ -22,10 +22,10 @@ reduce_function = lambda x, y: x * y
 filter_function = lambda x: x % 2 == 1
 map_function = lambda x: x
 
+
 def product_of_odds(list):
-    return reduce(reduce_function, \
-      filter(filter_function, \
-        map(map_function, list)), 1)
+    return reduce(reduce_function, filter(filter_function, map(map_function, list)), 1)
+
 
 if __name__ == "__main__":
     print("should be 15:", product_of_odds([1, 2, 3, 4, 5]))
